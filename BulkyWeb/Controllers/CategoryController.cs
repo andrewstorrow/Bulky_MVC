@@ -26,9 +26,21 @@ namespace BulkyWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            _db.Categories.Add(obj);
-            _db.SaveChanges();
-            return RedirectToAction("Index", "Category");
+            //if(obj.Name == obj.DisplayOrder.ToString())
+            //{
+            //    ModelState.AddModelError("name", "The Display Order cannot be the same as the Category Name");
+            //}
+            //if(obj.Name != null && obj.Name == "test")
+            //{
+            //    ModelState.AddModelError("", "Test is an invalid value");
+            //}
+            if(ModelState.IsValid)
+            {
+                _db.Categories.Add(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index", "Category");
+            }
+            return View();
         }
     }
 }
