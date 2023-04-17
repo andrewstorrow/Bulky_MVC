@@ -1,6 +1,7 @@
 ﻿using BulkyWeb.Data;
 using BulkyWeb.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BulkyWeb.Controllers
 {
@@ -26,14 +27,7 @@ namespace BulkyWeb.Controllers
         [HttpPost]
         public IActionResult Create(Category obj)
         {
-            //if(obj.Name == obj.DisplayOrder.ToString())
-            //{
-            //    ModelState.AddModelError("name", "The Display Order cannot be the same as the Category Name");
-            //}
-            //if(obj.Name != null && obj.Name == "test")
-            //{
-            //    ModelState.AddModelError("", "Test is an invalid value");
-            //}
+            //Check if display order is already in use
             if(_db.Categories.FirstOrDefault(u=>u.DisplayOrder == obj.DisplayOrder) != null)
             {
                 ModelState.AddModelError("DisplayOrder", 
@@ -69,15 +63,22 @@ namespace BulkyWeb.Controllers
         [HttpPost]
         public IActionResult Edit(Category obj)
         {
-            //Category? categoryFromDb = _db.Categories.FirstOrDefault(u => u.DisplayOrder == obj.DisplayOrder);
-            //if (categoryFromDb != null && categoryFromDb.Id != obj.Id)
-            //{
-            //    ModelState.AddModelError("DisplayOrder",
-            //        "That Display Order already exists. Please choose another.");
-            //}
+            //Check if display order is already in use
+            Category? categoryFromDb = _db.Categories.FirstOrDefault(u => u.DisplayOrder == obj.DisplayOrder);
+            if (categoryFromDb != null && categoryFromDb.Id != obj.Id)
+            {
+                ModelState.AddModelError("DisplayOrder",
+                    "That Display Order already exists. Please choose another.");
+            }
+            //Detach found category entity if it exists to avoid errors
+            if(categoryFromDb != null) {
+                _db.Entry(categoryFromDb).State = EntityState.Detached;
+            }
+
             if (ModelState.IsValid)
             {
                 _db.Categories.Update(obj);
+                //_db.Entry(obj).State = EntityState.Modified;
                 _db.SaveChanges();
                 TempData["success"] = "Category Updated Successfully";
                 return RedirectToAction("Index", "Category");

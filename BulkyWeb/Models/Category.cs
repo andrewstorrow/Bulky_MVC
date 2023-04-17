@@ -1,4 +1,6 @@
-﻿using System.ComponentModel;
+﻿using BulkyWeb.Data;
+using Microsoft.EntityFrameworkCore;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace BulkyWeb.Models
