@@ -18,7 +18,9 @@ namespace Bulky.DataAccess.Data
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
                 new Category { Id = 2, Name = "SciFi", DisplayOrder = 2 },
-                new Category { Id = 3, Name = "History", DisplayOrder = 3 }
+                new Category { Id = 3, Name = "History", DisplayOrder = 3 },
+                new Category { Id = 4, Name = "Fantasy", DisplayOrder = 4 },
+                new Category { Id = 5, Name = "Drama", DisplayOrder = 5 }
                 );
 
             modelBuilder.Entity<Product>().HasData(
@@ -32,7 +34,9 @@ namespace Bulky.DataAccess.Data
                     ListPrice = 12.99,
                     Price = 9.99,
                     Price50 = 8.99,
-                    Price100 = 8.49
+                    Price100 = 8.49,
+                    CategoryId = 4,
+                    ImageUrl = ""
                 },
                 new Product
                 {
@@ -44,7 +48,9 @@ namespace Bulky.DataAccess.Data
                     ListPrice = 13.99,
                     Price = 10.99,
                     Price50 = 9.99,
-                    Price100 = 8.99
+                    Price100 = 8.99,
+                    CategoryId = 5,
+                    ImageUrl = ""
                 },
                 new Product
                 {
@@ -56,7 +62,9 @@ namespace Bulky.DataAccess.Data
                     ListPrice = 11.99,
                     Price = 10.99,
                     Price50 = 9.99,
-                    Price100 = 8.99
+                    Price100 = 8.99,
+                    CategoryId = 3,
+                    ImageUrl = ""
                 }
                 );
         }

@@ -3,6 +3,7 @@ using Bulky.DataAccess.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Bulky.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230427181315_addForeignKeyForCategoryProductRelation")]
+    partial class addForeignKeyForCategoryProductRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -97,10 +100,6 @@ namespace Bulky.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUrl")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<double>("ListPrice")
                         .HasColumnType("float");
 
@@ -131,7 +130,6 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 4,
                             Description = "Follows the story of Harry Potter, a young wizard who discovers his magical heritage on his eleventh birthday, when he receives a letter of acceptance to Hogwarts School of Witchcraft and Wizardry",
                             ISBN = "978-0-7475-3269-9",
-                            ImageUrl = "",
                             ListPrice = 12.99,
                             Price = 9.9900000000000002,
                             Price100 = 8.4900000000000002,
@@ -145,7 +143,6 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 5,
                             Description = "Troy Phelan, an eccentric, reclusive, ruthless billionaire businessman, commits suicide. In order to cut his family out of his will, he makes a fake will a few hours before his suicide, putting his family into that will.",
                             ISBN = "0-09-924502-7",
-                            ImageUrl = "",
                             ListPrice = 13.99,
                             Price = 10.99,
                             Price100 = 8.9900000000000002,
@@ -159,7 +156,6 @@ namespace Bulky.DataAccess.Migrations
                             CategoryId = 3,
                             Description = "A group of history students travel to 14th-century France to rescue their professor.",
                             ISBN = "0679444815",
-                            ImageUrl = "",
                             ListPrice = 11.99,
                             Price = 10.99,
                             Price100 = 8.9900000000000002,
